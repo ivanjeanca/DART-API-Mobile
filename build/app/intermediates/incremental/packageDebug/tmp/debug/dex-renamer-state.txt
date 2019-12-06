@@ -1,4 +1,4 @@
-#Tue Nov 26 02:42:42 CST 2019
+#Fri Dec 06 03:43:38 CST 2019
 base.0=/home/jeancarlo_tirado/Desktop/API REST Dart/Mobile/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

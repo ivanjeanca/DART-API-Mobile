@@ -7,10 +7,20 @@ class Tarjeta extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-return new Card(
+    return new Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0),
+        side: BorderSide(
+          color: Color.fromARGB(50, 0, 0, 0),
+          width: 2
+        )
+      ),
       child: new Column(
         children: <Widget>[
-          new Image.network(productos.imagen, height: 200,),
+          new Image.network(
+            productos.imagen,
+            height: 200,
+          ),
           new Padding(
             padding: new EdgeInsets.all(7.0),
             child: new Row(
@@ -46,29 +56,27 @@ return new Card(
             padding: new EdgeInsets.all(7.0),
             child: new Row(
               children: <Widget>[
-               new Padding(
-                 padding: new EdgeInsets.all(7.0),
-                 child: new Icon(Icons.thumb_up),
-               ),
-               new Padding(
-                 padding: new EdgeInsets.all(7.0),
-                 child: new Text('Like',style: new TextStyle(fontSize: 18.0),),
-               ),
-               new Padding(
-                 padding: new EdgeInsets.all(7.0),
-                 child: new Icon(Icons.comment),
-               ),
-               new Padding(
-                 padding: new EdgeInsets.all(7.0),
-                 child: new Text('Comments',style: new TextStyle(fontSize: 18.0)),
-               )
-
-
-              ],
+                new Padding(
+                  padding: new EdgeInsets.all(7.0),
+                  child: new Icon(Icons.thumb_up),
+                ),
+                new Padding(
+                  padding: new EdgeInsets.all(7.0),
+                  child: new Text('Like',style: new TextStyle(fontSize: 18.0),),
+                ),
+                new Padding(
+                  padding: new EdgeInsets.all(7.0),
+                  child: new Icon(Icons.comment),
+                ),
+                new Padding(
+                  padding: new EdgeInsets.all(7.0),
+                  child: new Text('Comments',style: new TextStyle(fontSize: 18.0)),
+                )
+              ]
             )
           )
-        ],
-      ),
+        ]
+      )
     );
   }
 }

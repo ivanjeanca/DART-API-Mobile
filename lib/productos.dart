@@ -24,7 +24,7 @@ class ProductosState extends State<Productos>{
     return new Scaffold(
       appBar: AppBar(
         title: Text("Productos"),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Color.fromARGB(255, 33, 37, 41),
       ),
       body: Container(
         child: ListView.builder(
@@ -42,10 +42,9 @@ class ProductosState extends State<Productos>{
 
   Future<DAOProductos> getProductos() async{
     http.Response response = await http.get(
-        Uri.encodeFull("http://192.168.100.29:8888/productos"),
-        headers: { "Accept" : "application/json"}
+      Uri.encodeFull("http://192.168.100.29:8888/productos"),
+      headers: { "Accept" : "application/json"}
     );
-
     if( response.statusCode == 200 ) {
       List product = json.decode(response.body);
       var productos = product.map((producto) => DAOProductos.fromJson(producto)).toList();

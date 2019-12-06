@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wepapi/productos.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-
-import 'dashboard.dart';
 
 class Login extends StatefulWidget{
   @override
@@ -16,8 +12,8 @@ class Login extends StatefulWidget{
 
 class LoginState extends State<Login>{
 
-  final txtUserController = TextEditingController();
-  final txtPwdController = TextEditingController();
+  final txtUsuario = TextEditingController();
+  final txtContrasena = TextEditingController();
   bool recordarLogin = false;
 
   LoginState () {
@@ -31,15 +27,15 @@ class LoginState extends State<Login>{
     print("ira el logueao");
     print(logueado);
     if (logueado)
-      Navigator.pushReplacementNamed(context, '/dash');
+      Navigator.pushReplacementNamed(context, '/dashboard');
   }
 
   @override
   Widget build(BuildContext context) {
   
-    Future<int> validateUser() async{
-      var usr = txtUserController.text;
-      var pwd = txtPwdController.text;
+    Future<http.Response> validateUser() async{
+      var usr = txtUsuario.text;
+      var pwd = txtContrasena.text;
 
 
       http.Response response = await http.get(
@@ -48,7 +44,7 @@ class LoginState extends State<Login>{
       );
 
       var token = response.body; // Obtener el token de la peticion o el error
-      return response.statusCode;
+      return response;
     }
 
     final logo = Hero(
@@ -66,32 +62,30 @@ class LoginState extends State<Login>{
       style: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 30.0,
-            color: Color.fromARGB(255, 0, 100, 150),
+            color: Color.fromARGB(255, 33, 37, 41),
           ),
       textAlign: TextAlign.center,
     );
 
     final txtEmail = TextFormField(
       keyboardType: TextInputType.emailAddress,
-      controller: txtUserController,
+      controller: txtUsuario,
       //autofocus: false,
       decoration: InputDecoration(
         hintText: 'Correo electrónico',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(2.0),),
       ),
       cursorColor: Color.fromARGB(255, 0, 100, 150),
     );
 
     final txtPwd = TextFormField(
-      //autofocus: false,
-      //initialValue: 'some password',
-      controller: txtPwdController,
+      controller: txtContrasena,
       obscureText: true,
       decoration: InputDecoration(
         hintText: 'Contraseña',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(2.0)),
       ),
     );
 
@@ -100,7 +94,7 @@ class LoginState extends State<Login>{
       style: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 15.0,
-        color: Color.fromARGB(255, 0, 100, 150),
+        color: Color.fromARGB(255, 33, 37, 41),
       ),
     );
 
@@ -111,14 +105,14 @@ class LoginState extends State<Login>{
         });
       },
       value: recordarLogin,
-      activeColor: Color.fromARGB(255, 0, 100, 150),
+      activeColor: Color.fromARGB(255, 33, 37, 41),
     );
 
     final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(2),
         ),
         onPressed: () async {
           //var codigo = await validateUser();
@@ -129,11 +123,11 @@ class LoginState extends State<Login>{
             if(recordarLogin){
               print("Si quiero q se guarde");
               prefs.setBool("logueado", true);
+              //prefs.setBool("logueado", codigo.body);
             } else {
               prefs.setBool("logueado", false);
             }
-            //Navigator.push(context, MaterialPageRoute(builder:(context)=>Dashboard()));
-            Navigator.pushReplacementNamed(context, '/dash');
+            Navigator.pushReplacementNamed(context, '/dashboard');
           }else{
             showDialog(
               context: context,
@@ -155,7 +149,7 @@ class LoginState extends State<Login>{
           }
         },
         padding: EdgeInsets.all(12),
-        color: Color.fromARGB(255, 0, 100, 150),
+        color: Color.fromARGB(255, 33, 37, 41),
         child: Text('Entrar', style: TextStyle(color: Colors.white, fontSize: 17)),
       ),
     );
