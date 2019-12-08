@@ -119,7 +119,7 @@ class insertarCliente extends StatelessWidget{
   }
 
   Future<http.Response> guardarCliente() async{
-    final URL = 'http://192.168.100.29:8888/clientes';
+    final URL = 'http://192.168.1.76:8888/clientes';
     final headers = {'Content-Type': 'application/json'};
     
     var correo = txtCorreo.text;

@@ -42,7 +42,7 @@ class ProductosState extends State<Productos>{
 
   Future<DAOProductos> getProductos() async{
     http.Response response = await http.get(
-      Uri.encodeFull("http://192.168.100.29:8888/productos"),
+      Uri.encodeFull("http://192.168.1.76:8888/productos"),
       headers: { "Accept" : "application/json"}
     );
     if( response.statusCode == 200 ) {

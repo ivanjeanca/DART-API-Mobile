@@ -23,7 +23,7 @@ class AreasState extends State<Areas>{
     });
 
     var response = await http.get(
-        Uri.encodeFull("http://192.168.100.29:8888/areas"),
+        Uri.encodeFull("http://192.168.1.76:8888/areas"),
         headers: { "Accept" : "application/json"}
     );
 
@@ -166,7 +166,7 @@ class AreasState extends State<Areas>{
   }
 
   Future<http.Response> deleteArea(id) async {
-    final URL = 'http://192.168.100.29:8888/areas/' + id.toString();
+    final URL = 'http://192.168.1.76:8888/areas/' + id.toString();
     final headers = {'Content-Type': 'application/json'};
 
     var response = await http.delete(

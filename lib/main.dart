@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wepapi/dashboard.dart';
-import 'package:flutter_wepapi/productos.dart';
 import 'package:splashscreen/splashscreen.dart';
+
 import 'package:flutter_wepapi/login.dart';
+
+import 'package:flutter_wepapi/dashboard.dart';
+
+import 'package:flutter_wepapi/productos.dart';
+
+import 'package:flutter_wepapi/areas.dart';
+import 'package:flutter_wepapi/insertarArea.dart';
+
+import 'package:flutter_wepapi/areasCliente.dart';
+import 'package:flutter_wepapi/insertarAreaCliente.dart';
 
 import 'package:flutter_wepapi/clientes.dart';
 import 'package:flutter_wepapi/insertarCliente.dart';
 
-import 'package:flutter_wepapi/areas.dart';
-import 'package:flutter_wepapi/insertarArea.dart';
 
 void main() => runApp(Splash());
 
 class Splash extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return SplashScreenState();
   }
 }
@@ -23,19 +29,24 @@ class Splash extends StatefulWidget {
 class SplashScreenState extends State<Splash>{
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
 
       routes: {
         '/login'  : (context) => Login(),
         '/dashboard' : (context) => Dashboard(),
+
         '/productos' : (context) => Productos(),
 
         '/clientes' : (context) => Clientes(),
         '/insertar-cliente' : (context) => insertarCliente(),
 
+        '/areas-cliente' : (context) => AreasCliente(),
+        '/insertar-area-cliente' : (context) => insertarAreaCliente(),
+
         '/areas' : (context) => Areas(),
         '/insertar-area' : (context) => insertarArea(),
+
+
       },
       onUnknownRoute: (RouteSettings conf){
         return MaterialPageRoute(builder: (context)=>Productos());

@@ -34,7 +34,7 @@ class editarClienteState extends State<editarCliente>{
     });
 
     var response = await http.get(
-        Uri.encodeFull("http://192.168.100.29:8888/clientes/" + idcliente.toString()),
+        Uri.encodeFull("http://192.168.1.76:8888/clientes/" + idcliente.toString()),
         headers: { "Accept" : "application/json"}
     );
 
@@ -171,7 +171,7 @@ class editarClienteState extends State<editarCliente>{
   }
 
   Future<http.Response> guardarCliente(id) async{
-    final URL = 'http://192.168.100.29:8888/clientes/' + id.toString();
+    final URL = 'http://192.168.1.76:8888/clientes/' + id.toString();
     final headers = {'Content-Type': 'application/json'};
 
     var correo = txtCorreo.text;
@@ -201,7 +201,7 @@ class editarClienteState extends State<editarCliente>{
   }
 
   Future<http.Response> getCliente(id) async {
-    final URL = 'http://192.168.100.29:8888/clientes/' + id.toString();
+    final URL = 'http://192.168.1.76:8888/clientes/' + id.toString();
     final headers = {'Content-Type': 'application/json'};
 
     var response = await http.get(

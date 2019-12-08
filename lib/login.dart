@@ -39,7 +39,7 @@ class LoginState extends State<Login>{
 
 
       http.Response response = await http.get(
-        Uri.encodeFull("http://192.168.100.29:8888/usuarios/$usr/$pwd"),
+        Uri.encodeFull("http://192.168.1.76:8888/usuarios/$usr/$pwd"),
         headers: { "Accept" : "application/json"}
       );
 

@@ -49,7 +49,7 @@ class MenuLateralState extends State<MenuLateral>{
               trailing: Icon(Icons.account_box),
               onTap: (){
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/ctes');
+                Navigator.pushNamed(context, '/areas-cliente');
               },
             ),
             ListTile(

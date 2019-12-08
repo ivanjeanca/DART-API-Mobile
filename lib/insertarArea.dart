@@ -59,7 +59,7 @@ class insertarArea extends StatelessWidget{
   }
 
   Future<http.Response> guardarArea() async{
-    final URL = 'http://192.168.100.29:8888/areas';
+    final URL = 'http://192.168.1.76:8888/areas';
     final headers = {'Content-Type': 'application/json'};
     var area = txtArea.text;
 
