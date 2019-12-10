@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
+import 'package:flutter_wepapi/Strings.dart';
 
 class insertarCliente extends StatelessWidget{
   final txtNombre = TextEditingController();
@@ -119,7 +120,7 @@ class insertarCliente extends StatelessWidget{
   }
 
   Future<http.Response> guardarCliente() async{
-    final URL = 'http://192.168.1.76:8888/clientes';
+    final URL = Strings.direccion + 'clientes';
     final headers = {'Content-Type': 'application/json'};
     
     var correo = txtCorreo.text;

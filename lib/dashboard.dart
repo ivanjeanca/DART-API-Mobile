@@ -11,11 +11,30 @@ class Dashboard extends StatelessWidget{
 class MenuLateral extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
+
     return MenuLateralState();
   }
 }
 
-class MenuLateralState extends State<MenuLateral>{
+class MenuLateralState extends State<MenuLateral> {
+
+  String nombre, correo;
+
+  @override
+  void initState() {
+    getData();
+  }
+
+  Future<String> getData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    this.setState(() {
+      nombre = prefs.getString("nombre");
+      correo = prefs.getString("correo");
+    });
+    return "success";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +49,8 @@ class MenuLateralState extends State<MenuLateral>{
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 33, 37, 41),
               ),
-              accountName: Text("Jeancarlo Tirado"),
-              accountEmail: Text("15030104@itcelaya.edu.mx"),
+              accountName: Text((nombre != null) ? nombre : ""),
+              accountEmail: Text((correo != null ) ? correo : ""),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: new NetworkImage("http://i.pravatar.cc/300"),
               ),
@@ -61,19 +80,11 @@ class MenuLateralState extends State<MenuLateral>{
               },
             ),
             ListTile(
-              title: Text("Ver detalle pedido"),
-              trailing: Icon(Icons.event_note),
-              onTap: (){
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/ctes');
-              },
-            ),
-            ListTile(
               title: Text("Ver pedidos"),
               trailing: Icon(Icons.shop),
               onTap: (){
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/ctes');
+                Navigator.pushNamed(context, '/pedidos');
               },
             ),
             ListTile(
@@ -89,7 +100,7 @@ class MenuLateralState extends State<MenuLateral>{
               trailing: Icon(Icons.shopping_cart),
               onTap: (){
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/ctes');
+                Navigator.pushNamed(context, '/producto-area-cliente');
               },
             ),
             ListTile(
@@ -99,7 +110,7 @@ class MenuLateralState extends State<MenuLateral>{
                 final SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.setBool("logueado", false);
                 Navigator.pop(context);
-                Navigator.pushNamedAndRemoveUntil(context, 
+                Navigator.pushNamedAndRemoveUntil(context,
                 '/login',(Route<dynamic> route) => false);
               },
             )

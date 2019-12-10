@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_wepapi/Strings.dart';
 
 class Login extends StatefulWidget{
   @override
@@ -32,18 +35,28 @@ class LoginState extends State<Login>{
 
   @override
   Widget build(BuildContext context) {
-  
+
     Future<http.Response> validateUser() async{
       var usr = txtUsuario.text;
       var pwd = txtContrasena.text;
 
 
       http.Response response = await http.get(
-        Uri.encodeFull("http://192.168.1.76:8888/usuarios/$usr/$pwd"),
-        headers: { "Accept" : "application/json"}
+          Uri.encodeFull(Strings.direccion + "login/$usr/$pwd"),
+          headers: { "Accept" : "application/json"}
       );
 
-      var token = response.body; // Obtener el token de la peticion o el error
+      return response;
+    }
+
+    Future<http.Response> userInfo() async{
+      var usr = txtUsuario.text;
+
+      http.Response response = await http.get(
+          Uri.encodeFull(Strings.direccion + "usuarios/$usr"),
+          headers: { "Accept" : "application/json"}
+      );
+
       return response;
     }
 
@@ -115,26 +128,35 @@ class LoginState extends State<Login>{
           borderRadius: BorderRadius.circular(2),
         ),
         onPressed: () async {
-          //var codigo = await validateUser();
-          var codigo = 200;
-          print(codigo);
-          if( codigo == 200 ){
+          var codigo = await validateUser();
+          //var codigo = 200;
+          print(codigo.statusCode);
+          if( codigo.statusCode == 200 ){
             final SharedPreferences prefs = await SharedPreferences.getInstance();
-            if(recordarLogin){
-              print("Si quiero q se guarde");
+            final loginData = json.decode(codigo.body);
+            print(loginData.toString());
+            print(loginData.toString().substring(17, 49));
+            var usuario = await userInfo();
+            final userData = json.decode(usuario.body);
+
+            if(recordarLogin)
               prefs.setBool("logueado", true);
-              //prefs.setBool("logueado", codigo.body);
-            } else {
+            else
               prefs.setBool("logueado", false);
-            }
+
+            prefs.setString("token", loginData.toString().substring(17, 49));
+            prefs.setInt("id_empleado", userData[0]['id']);
+            prefs.setString("nombre", userData[0]['empleado']['nombre'] + " " + userData[0]['empleado']['apaterno'] + " " + userData[0]['empleado']['amaterno']);
+            prefs.setString("correo", userData[0]['empleado']['correo']);
+
             Navigator.pushReplacementNamed(context, '/dashboard');
           }else{
             showDialog(
               context: context,
               builder: (BuildContext context){
                 return AlertDialog(
-                  title: Text("Mensaje de la APP"),
-                  content: Text("Error al Autenticarse"),
+                  title: Text("Inicio de sesión incorrecto"),
+                  content: Text("El usuario y/o contraseña no son correctos"),
                   actions: <Widget>[
                     new FlatButton(
                       child: Text("Cerrar"),

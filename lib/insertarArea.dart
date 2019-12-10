@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
+import 'package:flutter_wepapi/Strings.dart';
 
 class insertarArea extends StatelessWidget{
   final txtArea = TextEditingController();
@@ -59,7 +60,7 @@ class insertarArea extends StatelessWidget{
   }
 
   Future<http.Response> guardarArea() async{
-    final URL = 'http://192.168.1.76:8888/areas';
+    final URL = Strings.direccion + 'areas';
     final headers = {'Content-Type': 'application/json'};
     var area = txtArea.text;
 

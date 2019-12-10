@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
+import 'package:flutter_wepapi/Strings.dart';
 
 class insertarAreaCliente extends StatefulWidget {
   @override
@@ -29,11 +30,11 @@ class insertarAreaClienteState extends State<insertarAreaCliente>{
     });
 
     var clientes_response = await http.get(
-        Uri.encodeFull("http://192.168.1.76:8888/clientes"),
+        Uri.encodeFull(Strings.direccion + "clientes"),
         headers: { "Accept" : "application/json"}
     );
     var areas_response = await http.get(
-        Uri.encodeFull("http://192.168.1.76:8888/areas"),
+        Uri.encodeFull(Strings.direccion + "areas"),
         headers: { "Accept" : "application/json"}
     );
 
@@ -206,7 +207,7 @@ class insertarAreaClienteState extends State<insertarAreaCliente>{
   }
 
   Future<http.Response> guardarAreaCliente() async{
-    final URL = 'http://192.168.1.76:8888/areascliente';
+    final URL = Strings.direccion + 'areascliente';
     final headers = {'Content-Type': 'application/json'};
 
     var id_area = txtArea.text;

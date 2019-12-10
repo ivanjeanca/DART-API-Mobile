@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
+import 'package:flutter_wepapi/Strings.dart';
 
 class editarArea extends StatefulWidget{
   final id;
@@ -31,7 +32,7 @@ class editarAreaState extends State<editarArea>{
     });
 
     var response = await http.get(
-        Uri.encodeFull("http://192.168.1.76:8888/areas/" + idarea.toString()),
+        Uri.encodeFull(Strings.direccion + "areas/" + idarea.toString()),
         headers: { "Accept" : "application/json"}
     );
 
@@ -108,7 +109,7 @@ class editarAreaState extends State<editarArea>{
   }
 
   Future<http.Response> guardarArea(id) async{
-    final URL = 'http://192.168.1.76:8888/areas/' + id.toString();
+    final URL = Strings.direccion + 'areas/' + id.toString();
     final headers = {'Content-Type': 'application/json'};
 
     var area = txtArea.text;
@@ -132,7 +133,7 @@ class editarAreaState extends State<editarArea>{
   }
 
   Future<http.Response> getArea(id) async {
-    final URL = 'http://192.168.1.76:8888/areas/' + id.toString();
+    final URL = Strings.direccion + 'areas/' + id.toString();
     final headers = {'Content-Type': 'application/json'};
 
     var response = await http.get(

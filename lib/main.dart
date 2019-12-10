@@ -16,6 +16,13 @@ import 'package:flutter_wepapi/insertarAreaCliente.dart';
 import 'package:flutter_wepapi/clientes.dart';
 import 'package:flutter_wepapi/insertarCliente.dart';
 
+import 'package:flutter_wepapi/pedidos.dart';
+import 'package:flutter_wepapi/pedidosInfo.dart';
+import 'package:flutter_wepapi/insertarPedido.dart';
+
+import 'package:flutter_wepapi/productoAreaCliente.dart';
+import 'package:flutter_wepapi/insertarProductoAreaCliente.dart';
+
 
 void main() => runApp(Splash());
 
@@ -46,6 +53,12 @@ class SplashScreenState extends State<Splash>{
         '/areas' : (context) => Areas(),
         '/insertar-area' : (context) => insertarArea(),
 
+        '/producto-area-cliente' : (context) => ProductoAreaCliente(),
+        '/insertar-producto-area-cliente' : (context) => insertarProductoAreaCliente(),
+
+        '/pedidos' : (context) => pedidos(),
+        '/pedidos-info' : (context) => pedidosInfo(),
+        '/insertar-pedido' : (context) => insertarPedido(),
 
       },
       onUnknownRoute: (RouteSettings conf){
@@ -53,6 +66,7 @@ class SplashScreenState extends State<Splash>{
       },
 
       title: "Bienvenido",
+      debugShowCheckedModeBanner: false,
       home: SplashScreen(
         seconds: 2,
         navigateAfterSeconds: Login(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wepapi/models/productos.dart';
 import 'package:flutter_wepapi/tarjeta.dart';
+import 'package:flutter_wepapi/Strings.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -42,7 +43,7 @@ class ProductosState extends State<Productos>{
 
   Future<DAOProductos> getProductos() async{
     http.Response response = await http.get(
-      Uri.encodeFull("http://192.168.1.76:8888/productos"),
+      Uri.encodeFull(Strings.direccion + "productos"),
       headers: { "Accept" : "application/json"}
     );
     if( response.statusCode == 200 ) {

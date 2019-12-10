@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_wepapi/editarAreaCliente.dart';
+import 'package:flutter_wepapi/Strings.dart';
 
 class AreasCliente extends StatefulWidget{
   @override
@@ -23,7 +24,7 @@ class AreasClienteState extends State<AreasCliente>{
     });
 
     var response = await http.get(
-        Uri.encodeFull("http://192.168.1.76:8888/areascliente"),
+        Uri.encodeFull(Strings.direccion + "areascliente"),
         headers: { "Accept" : "application/json"}
     );
 
@@ -176,7 +177,7 @@ class AreasClienteState extends State<AreasCliente>{
   }
 
   Future<http.Response> deleteArea(id) async {
-    final URL = 'http://192.168.1.76:8888/areascliente/' + id.toString();
+    final URL = Strings.direccion + 'areascliente/' + id.toString();
     final headers = {'Content-Type': 'application/json'};
 
     var response = await http.delete(
